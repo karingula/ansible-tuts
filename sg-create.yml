@@ -16,3 +16,19 @@
             to_port:  80
             cidr_ip:  0.0.0.0/0
       register: security_group
+    
+    - name: create an ec2 instance
+      ec2:
+        aws_access_key: "your_access_key"
+        aws_secret_key: "your_secret_key"
+        image:  some_ami_id
+        wait: yes
+        instance_type:  t2.micro
+        group_id: "{{security_group.group_id}}"
+        region: us-east-1
+        instance_tags:
+          Name: vj_test_server
+        count_tag:
+          Name: vj_test_server
+        exact_count:  1
+      register: ec2
