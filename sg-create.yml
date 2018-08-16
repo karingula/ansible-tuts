@@ -21,8 +21,13 @@
       ec2:
         aws_access_key: "your_access_key"
         aws_secret_key: "your_secret_key"
-        image:  some_ami_id
+        image:  ami-759bc50a
         wait: yes
+        wait_timeout: 500
+        volumes:
+          - device_name:  /dev/sda1
+            volume_type:  gp2
+            volume_size:  8
         instance_type:  t2.micro
         group_id: "{{security_group.group_id}}"
         region: us-east-1
@@ -30,5 +35,5 @@
           Name: vj_test_server
         count_tag:
           Name: vj_test_server
-        exact_count:  1
+        exact_count:  2
       register: ec2
