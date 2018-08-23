@@ -1,0 +1,33 @@
+[red-hat]
+redhat
+
+[az-linux]
+amazon
+
+[bun]
+loli
+
+[ec2-group:children]
+red-hat
+az-linux
+
+[root-group:children]
+bun
+
+[ec2-group:vars]
+ansible_ssh_private_key_file=<My Private Key File>
+ansible_user=ec2-user
+
+[root-group:vars]
+ansible_ssh_private_key_file=<My Private Key File>
+ansible_user=ubuntu
+
+[red-hat:vars]
+ansible_host=<redhat ip>
+
+[az-linux:vars]
+ansible_host=<az-linux ip>
+
+[bun:vars]
+ansible_host=<ubuntu ip>
+ansible_python_interpreter=/usr/bin/python3
